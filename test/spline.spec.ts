@@ -1,4 +1,4 @@
-import { assert, expect } from 'chai';
+import { expect } from 'chai';
 import Spline from '../src/spline';
 
 describe("Spline", () => {
@@ -12,9 +12,38 @@ describe("Spline", () => {
     expect(new Spline(spline).reticulatedCount).to.eq(1);
   });
 
-  it("always can be reticulated again", () => {
-    const reticulatedSpline = spline.reticulate();
-    expect(reticulatedSpline).to.not.be.null;
-    expect(reticulatedSpline.reticulatedCount).to.eq(1);
+  describe("with extracting assertNotNull", () => {
+    function assertNotNull<T>(v: T | null): T {
+      if (!v) throw new Error();
+  
+      return v;
+    }
+  
+    it("can be reticulated", () => {
+      const reticulatedSpline = assertNotNull(spline.reticulate());
+      expect(reticulatedSpline.reticulatedCount).to.eq(1);
+    });
+  });
+
+  describe("with expect inside the assert", () => {
+    function assertNotNull<T>(v: T | null): T {
+      expect(v).to.exist;
+      if (!v) throw new Error();
+  
+      return v;
+    }
+  
+    it("can be reticulated", () => {
+      const reticulatedSpline = assertNotNull(spline.reticulate());
+      expect(reticulatedSpline.reticulatedCount).to.eq(1);
+    });
+  });
+
+  describe("allowing null", () => {
+    it("can be reticulated", () => {
+      const reticulatedSpline = spline.reticulate();
+      expect(reticulatedSpline).to.exist;
+      expect(reticulatedSpline!.reticulatedCount).to.eq(1);
+    });
   });
 });

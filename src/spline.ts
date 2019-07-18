@@ -5,7 +5,7 @@ export default class Spline {
     this.reticulatedCount = parent && parent.reticulatedCount + 1 || 0;
   }
   
-  public reticulate(): Spline | undefined {
-    return new Spline(this);
+  public reticulate(): Spline | null {
+    return null; // new Spline(this);
   }
 }
