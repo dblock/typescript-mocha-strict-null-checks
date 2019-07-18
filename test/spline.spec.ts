@@ -53,4 +53,12 @@ describe("Spline", () => {
       expect(reticulatedSpline!.reticulatedCount).to.eq(1);
     });
   });
+
+  describe("using a cast", () => {
+    it("can be reticulated", () => {
+      const reticulatedSpline = spline.reticulate() as Spline;
+      expect(reticulatedSpline).to.exist;
+      expect(reticulatedSpline.reticulatedCount).to.eq(1);
+    });
+  });
 });
