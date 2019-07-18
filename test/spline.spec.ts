@@ -46,4 +46,11 @@ describe("Spline", () => {
       expect(reticulatedSpline!.reticulatedCount).to.eq(1);
     });
   });
+
+  describe("allowing null without existence check", () => {
+    it("can be reticulated", () => {
+      const reticulatedSpline = spline.reticulate();
+      expect(reticulatedSpline!.reticulatedCount).to.eq(1);
+    });
+  });
 });
